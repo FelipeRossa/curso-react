@@ -1,0 +1,10 @@
+@import url('../node_modules/@fortawesome/fontawesome-free/css/all.min.css');
+
+#root {
+    /* width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto; */
+  }
