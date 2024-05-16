@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CursoAspnetCore.API.Models
 {
@@ -14,7 +10,7 @@ namespace CursoAspnetCore.API.Models
 
         public string Descricao { get; set; }
 
-        public string Prioridade { get; set; }
+        public Prioridade Prioridade { get; set; }
 
         public Servico() { }
 

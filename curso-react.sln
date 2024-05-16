@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "back", "back", "{D3C2E7EC-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C22F03D0-7E50-4386-BE19-E0056350F516}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoReact.API", "back\src\CursoReact.API\CursoReact.API.csproj", "{9AB74172-0FF2-4D2A-9890-7C55E7C263D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoAspnetCore.API", "back\src\CursoAspnetCore.API\CursoAspnetCore.API.csproj", "{9AB74172-0FF2-4D2A-9890-7C55E7C263D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
