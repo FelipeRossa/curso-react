@@ -52,8 +52,6 @@ export default function ServicoForm(props: any) {
 
     return (
         <>
-
-            <h1>Atividades</h1>
             <form className='row g-3' onSubmit={handleSubmit}>
                 <div className='col-md-6'>
                     <label className='form-label'>Título</label>
@@ -73,10 +71,10 @@ export default function ServicoForm(props: any) {
                         value={servico.prioridade}
                         onChange={inputTextHandler}
                         id="prioridade" className="form-select">
-                        <option defaultValue="0">Selecionar...</option>
-                        <option value="1">Baixa</option>
-                        <option value="2">Normal</option>
-                        <option value="3">Alta</option>
+                        <option defaultValue="Não Definifo">Selecionar...</option>
+                        <option value="Baixa">Baixa</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Alta">Alta</option>
                     </select>
                 </div>
 

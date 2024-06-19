@@ -21,18 +21,19 @@ namespace CursoAspnetCore.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Servico> get()
+        public IEnumerable<Servico> Get()
         {
             return _context.Servicos;
         }
 
         [HttpPost]
-        public IEnumerable<Servico> Post(Servico servico)
+        public Servico Post(Servico servico)
         {
             _context.Servicos.Add(servico);
             if (_context.SaveChanges() > 0)
             {
-                return _context.Servicos;
+
+                return _context.Servicos.FirstOrDefault(serv => serv.Id == servico.Id);
             }
             else
             {

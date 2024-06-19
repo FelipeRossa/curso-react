@@ -2,12 +2,10 @@ export default function Servico(props: any) {
 
     function prioridadeLabel(param: string) {
         switch (param) {
-            case '1':
-                return 'Alta';
-            case '2':
-                return 'Normal';
-            case '3':
-                return 'Baixa';
+            case 'Alta':
+            case 'Normal':
+            case 'Baixa':
+                return param;
             default:
                 return 'Não definido';
         }
@@ -15,11 +13,11 @@ export default function Servico(props: any) {
 
     function prioridadeSyle(param: string, icone: Boolean) {
         switch (param) {
-            case '1':
+            case 'Alta':
                 return icone ? 'frown' : 'warning';
-            case '2':
+            case 'Normal':
                 return icone ? 'meh' : 'black';
-            case '3':
+            case 'Baixa':
                 return icone ? 'smile' : 'success';
             default:
                 return 'Não definido';
@@ -53,7 +51,7 @@ export default function Servico(props: any) {
                     </button>
                     <button
                         className="btn btn-outline-danger btn-sm"
-                        onClick={() => props.deletarservico(props.servico.id)}>
+                        onClick={() => props.handleConfirmModal(props.servico.id)}>
                         <i className="fas fa-trash me-2"></i>
                         Deletar
                     </button>

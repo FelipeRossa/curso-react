@@ -6,9 +6,10 @@ export default function ServicoLista(props: any) {
             {props.servicos.map((servico: any) => (
 
                 <Servico
+                    key={servico.id}
                     servico={servico}
-                    deletarservico={props.deletarservico}
-                    getServico = {props.getServico}
+                    getServico={props.getServico}
+                    handleConfirmModal={props.handleConfirmModal}
                 />
             ))}
         </div>

@@ -13,6 +13,7 @@ namespace CursoAspnetCore.API
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,6 +36,11 @@ namespace CursoAspnetCore.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CursoAspnetCore.API", Version = "v1" });
             });
+
+            services.AddCors();
+
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +58,8 @@ namespace CursoAspnetCore.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(option => option.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
