@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import ServicoForm from './components/ServicoForm';
 import ServicoLista from './components/ServicoLista';
-import api from './api/atividade';
+import api  from './api/servico';
 import { Button, Modal } from 'react-bootstrap';
 
 
@@ -30,7 +30,7 @@ function App() {
   };
 
   const pegarTodosServicos = async () => {
-    const response = await api.get('Atividade');
+    const response = await api.get('Servico');
 
     return response.data;
   }
@@ -51,14 +51,14 @@ function App() {
   }, [])
 
   const addServico = async (serv: any) => {
-    const response = await api.post('atividade', serv);
+    const response = await api.post('servico', serv);
     setServicos([...servicos, response.data])
     handleServModal()
   }
 
   const deletarservico = async (id: number) => {
     handleConfirmModal(0);
-    if (await api.delete(`atividade/${id}`)) {
+    if (await api.delete(`servico/${id}`)) {
       const servicosFiltrados = servicos.filter(serv => serv.id != id);
 
       setServicos([...servicosFiltrados]);
@@ -82,7 +82,7 @@ function App() {
   }
 
   const atualizarServico = async (servicoEdicao: any) => {
-    const response = await api.put(`atividade/${servicoEdicao.id}`, servicoEdicao);
+    const response = await api.put(`servico/${servicoEdicao.id}`, servicoEdicao);
     const { id } = response.data;
     setServicos(servicos.map(item => item.id == id ? response.data : item))
 
@@ -125,7 +125,7 @@ function App() {
         show={smShowConfirmModal}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Excluindo Atividade{' '}  {servico.id != 0 ? servico.id : ''}</Modal.Title>
+          <Modal.Title>Excluindo servico{' '}  {servico.id != 0 ? servico.id : ''}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Tem certeza que deseja excluir o servico {servico.id}

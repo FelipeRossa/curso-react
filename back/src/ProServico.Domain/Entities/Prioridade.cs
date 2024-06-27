@@ -1,4 +1,4 @@
-namespace CursoAspnetCore.API.Models
+namespace ProServico.Domain.Entities
 {
     public enum Prioridade
     {

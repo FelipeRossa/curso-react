@@ -4,10 +4,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using CursoAspnetCore.API.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using ProServico.Data.Context;
+using ProServico.Domain.Interfaces.Repositories;
+using ProServico.Data.Repositories;
+using ProServico.Domain.Interfaces.Services;
+using ProServico.Domain.Services;
 
 namespace CursoAspnetCore.API
 {
@@ -29,6 +32,11 @@ namespace CursoAspnetCore.API
                 options => options.UseSqlite(Configuration.GetConnectionString("Default"))
 
             );
+
+            services.AddScoped<IServicoRepo, ServicoRepo>();
+            services.AddScoped<IGeralRepo, GeralRepo>();
+            services.AddScoped<IServicoService, ServicoService>();
+
             services.AddControllers().AddJsonOptions(op =>
                 op.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
             );
