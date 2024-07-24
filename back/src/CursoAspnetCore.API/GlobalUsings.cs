@@ -1,0 +1,13 @@
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.OpenApi.Models;
+global using Microsoft.EntityFrameworkCore;
+global using System.Text.Json.Serialization;
+global using ProServico.Data.Context;
+global using ProServico.Domain.Interfaces.Repositories;
+global using ProServico.Data.Repositories;
+global using ProServico.Domain.Interfaces.Services;
+global using ProServico.Domain.Services;

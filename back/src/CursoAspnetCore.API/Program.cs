@@ -1,26 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace CursoAspnetCore.API
+builder.Services.AddDbContext<DataContext>(
+    options => options.UseSqlite(builder.Configuration.GetConnectionString("Default"))
+);
+
+builder.Services.AddScoped<IServicoRepo, ServicoRepo>();
+builder.Services.AddScoped<IGeralRepo, GeralRepo>();
+builder.Services.AddScoped<IServicoService, ServicoService>();
+
+builder.Services.AddControllers().AddJsonOptions(op =>
+    op.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "CursoAspnetCore.API", Version = "v1" });
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+builder.Services.AddCors();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CursoAspnetCore.API v1"));
 }
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.UseCors(option => option.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+app.MapControllers();
+app.Run();
