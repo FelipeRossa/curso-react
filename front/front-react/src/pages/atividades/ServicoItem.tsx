@@ -1,4 +1,4 @@
-export default function Servico(props: any) {
+export default function ServicoItem(props: any) {
 
     function prioridadeLabel(param: string) {
         switch (param) {
