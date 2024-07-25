@@ -12,7 +12,8 @@ export default function Menu() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav>
 
-                        <Nav.Link as={NavLink} to={'/cliente/lista'}>
+                        <Nav.Link 
+                            as={NavLink} to={'/cliente/lista'}>
                             Clientes
                         </Nav.Link>
                         <br />
