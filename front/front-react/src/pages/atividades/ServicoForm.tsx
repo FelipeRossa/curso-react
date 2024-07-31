@@ -1,52 +1,61 @@
 import { useEffect, useState } from "react";
+import { IServico, Prioridade } from "../../model/servico";
+import { ServicoFormProps } from "../../model/servicoProps";
 
-const servicoInicial = {
+const servicoInicial: IServico = {
     id: 0,
-    prioridade: '0',
+    prioridade: Prioridade.NaoDefinido,
     descricao: '',
     titulo: ''
 }
 
-export default function ServicoForm(props: any) {
-    const [servico, setServico] = useState(servicoAtual());
+const ServicoForm: React.FC<ServicoFormProps> = ({
+    servicoSelecionado,
+    atualizarServico,
+    addServico,
+    cancelarServico
+
+}: ServicoFormProps) => {
+
+    const [servico, setServico] = useState<IServico>(servicoAtual());
 
     useEffect(() => {
-        if (props.servicoSelecionado.id != 0) {
-            setServico(props.servicoSelecionado)
+        if (servicoSelecionado.id != 0) {
+            setServico(servicoSelecionado)
         }
-    }, [props.servicoSelecionado]);
+    }, [servicoSelecionado]);
 
-    const inputTextHandler = (e: any) => {
+    const handleValue = (e: any) => {
         const { name, value } = e.target;
 
         setServico({ ...servico, [name]: value })
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (props.servicoSelecionado.id != 0) {
-            props.atualizarServico(servico);
+        if (servicoSelecionado.id != 0) {
+            atualizarServico(servico);
         } else {
-            props.addServico(servico);
+            addServico(servico);
         }
 
         setServico(servicoInicial);
     }
 
-    function servicoAtual() {
-        if (props.servicoSelecionado.id != 0) {
-            return props.servicoSelecionado;
+    function servicoAtual(): IServico {
+        if (servicoSelecionado.id != 0) {
+            return servicoSelecionado;
 
         } else {
             return servicoInicial;
         }
     }
 
-    const cancelar = (e: any) => {
+    const cancelar = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        props.cancelarServico();
+        cancelarServico();
         setServico(servicoInicial);
     }
 
@@ -58,7 +67,7 @@ export default function ServicoForm(props: any) {
                     <input
                         name='titulo'
                         value={servico.titulo}
-                        onChange={inputTextHandler}
+                        onChange={handleValue}
                         id='titulo'
                         type="text"
                         className="form-control" />
@@ -69,7 +78,7 @@ export default function ServicoForm(props: any) {
                     <select
                         name='prioridade'
                         value={servico.prioridade}
-                        onChange={inputTextHandler}
+                        onChange={handleValue}
                         id="prioridade" className="form-select">
                         <option defaultValue="Não Definifo">Selecionar...</option>
                         <option value="Baixa">Baixa</option>
@@ -83,7 +92,7 @@ export default function ServicoForm(props: any) {
                     <textarea
                         name='descricao'
                         value={servico.descricao}
-                        onChange={inputTextHandler}
+                        onChange={handleValue}
                         id='descricao'
                         className="form-control" />
 
@@ -107,3 +116,4 @@ export default function ServicoForm(props: any) {
 
     )
 }
+export default ServicoForm;

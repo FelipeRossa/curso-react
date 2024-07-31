@@ -1,6 +1,6 @@
 import ClienteLista from "./ClienteLista";
 
-export default function Cliente() {
+const Cliente: React.FC = () => {
     return (
         <>
 
@@ -8,3 +8,5 @@ export default function Cliente() {
         </>
     );
 }
+
+export default Cliente;

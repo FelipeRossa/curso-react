@@ -1,21 +1,25 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ServicoLista from './ServicoLista';
 import api from '../../api/servico';
 import { Button, Modal } from 'react-bootstrap';
 import TitlePage from '../../components/TitlePage';
 import ServicoForm from './ServicoForm';
+import { IServico, Prioridade } from '../../model/servico';
 
+const servicoInicial: IServico = {
+  id: 0,
+  prioridade: Prioridade.NaoDefinido,
+  descricao: '',
+  titulo: ''
+}
 
-let initialState: any[] | (() => any[]) = [];
-
-export default function Servico() {
+const Servico: React.FC = () => {
   const [showServModal, setShowServModal] = useState(false);
   const [smShowConfirmModal, setSmShowConfirmModal] = useState(false);
 
-  const [index] = useState(0);
-  const [servicos, setServicos] = useState(initialState);
-  const [servico, setServico] = useState({ id: 0 });
+  const [servicos, setServicos] = useState<IServico[]>([]);
+  const [servico, setServico] = useState<IServico>(servicoInicial);
 
   const handleServModal = () => setShowServModal(!showServModal);
 
@@ -25,7 +29,7 @@ export default function Servico() {
       setServico(servicoFiltrado[0]);
 
     } else {
-      setServico({ id: 0 });
+      setServico(servicoInicial);
     }
     setSmShowConfirmModal(!smShowConfirmModal)
   };
@@ -37,7 +41,7 @@ export default function Servico() {
   }
 
   const novoServico = () => {
-    setServico({ id: 0 })
+    setServico(servicoInicial)
     handleServModal()
   }
 
@@ -51,7 +55,7 @@ export default function Servico() {
     getServicos();
   }, [])
 
-  const addServico = async (serv: any) => {
+  const addServico = async (serv: IServico) => {
     const response = await api.post('servico', serv);
     setServicos([...servicos, response.data])
     handleServModal()
@@ -78,16 +82,16 @@ export default function Servico() {
   }
 
   function cancelarServico() {
-    setServico({ id: 0 })
-    handleServModal()
+    setServico(servicoInicial)
+    handleServModal();
   }
 
-  const atualizarServico = async (servicoEdicao: any) => {
+  const atualizarServico = async (servicoEdicao: IServico) => {
     const response = await api.put(`servico/${servicoEdicao.id}`, servicoEdicao);
     const { id } = response.data;
     setServicos(servicos.map(item => item.id == id ? response.data : item))
 
-    setServico({ id: 0 })
+    setServico(servicoInicial)
     handleServModal()
   }
 
@@ -114,10 +118,8 @@ export default function Servico() {
         <Modal.Body>
           <ServicoForm
             addServico={addServico}
-            servicos={servicos}
             cancelarServico={cancelarServico}
             servicoSelecionado={servico}
-            maxValueServicos={maxValueServicos}
             atualizarServico={atualizarServico}
           />
         </Modal.Body>
@@ -148,4 +150,5 @@ export default function Servico() {
 
   )
 }
+export default Servico;
 

@@ -6,7 +6,7 @@ import Home from './pages/home/Home';
 import ClienteForm from './pages/clientes/ClienteForm';
 import PageNotFound from './components/PageNotFound';
 
-export default function App() {
+ const App: React.FC = () => {
 
   return (
     <>
@@ -20,3 +20,5 @@ export default function App() {
     </>
   )
 }
+
+export default App;

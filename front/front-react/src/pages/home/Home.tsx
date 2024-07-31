@@ -1,7 +1,7 @@
 import { Card, Col, Row } from 'react-bootstrap'
 import TitlePage from '../../components/TitlePage'
 
-export default function Home() {
+const Home: React.FC = () => {
     return (
         <>
             <TitlePage tituloPagina='HOME' />
@@ -54,3 +54,4 @@ export default function Home() {
         </>
     )
 }
+export default Home;

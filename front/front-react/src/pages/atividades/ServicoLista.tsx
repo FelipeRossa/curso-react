@@ -1,17 +1,25 @@
+import { ServicoListaProps } from "../../model/servicoProps";
 import ServicoItem from "./ServicoItem";
 
-export default function ServicoLista(props: any) {
+
+
+const ServicoLista: React.FC<ServicoListaProps> = ({
+    servicos,
+    getServico,
+    handleConfirmModal
+}: ServicoListaProps) => {
     return (
         <div className='mt-3'>
-            {props.servicos.map((servico: any) => (
+            {servicos.map((servico: any) => (
 
                 <ServicoItem
                     key={servico.id}
                     servico={servico}
-                    getServico={props.getServico}
-                    handleConfirmModal={props.handleConfirmModal}
+                    getServico={getServico}
+                    handleConfirmModal={handleConfirmModal}
                 />
             ))}
         </div>
     )
 }
+export default ServicoLista;

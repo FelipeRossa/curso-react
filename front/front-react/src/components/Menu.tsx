@@ -1,10 +1,10 @@
 import Container from 'react-bootstrap/Container';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
-export default function Menu() {
+const Menu = () => {
+    const getActiveRoute = useLocation().pathname ? 'Active' : '';
     return (
-
         <Navbar bg="dark" expand="lg" className="navbar-expand-lg bg-primary" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand as={NavLink} to={'/'}>SKC</Navbar.Brand>
@@ -13,11 +13,18 @@ export default function Menu() {
                     <Nav>
 
                         <Nav.Link 
-                            as={NavLink} to={'/cliente/lista'}>
+                            className={getActiveRoute}
+                            as={NavLink} 
+                            to={'/cliente/lista'}>
+
                             Clientes
                         </Nav.Link>
                         <br />
-                        <Nav.Link as={NavLink} to={'/servico/lista'}>
+                        <Nav.Link 
+                            className={getActiveRoute}
+                            as={NavLink} 
+                            to={'/servico/lista'}>
+
                             Servicos
                         </Nav.Link>
 
@@ -39,3 +46,5 @@ export default function Menu() {
     );
 
 }
+
+export default Menu;
